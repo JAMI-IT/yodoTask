@@ -1,0 +1,141 @@
+/* General Styling */
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: #333;
+  position: relative; /* Needed for positioning the background grid */
+}
+
+/* Grid Background */
+.App::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+      0deg,
+      #ddd,
+      #ddd 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    /* Horizontal lines */
+      repeating-linear-gradient(
+        90deg,
+        #ddd,
+        #ddd 1px,
+        transparent 1px,
+        transparent 20px
+      ); /* Vertical lines */
+  z-index: -1; /* Send it to the background */
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  background-color: #007bff;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-left h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff6347;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.header-button:hover {
+  background-color: #ff4500;
+}
+
+/* Image Styling */
+.header-image {
+  width: 50px; /* Set the width of the image */
+  height: auto; /* Maintain the aspect ratio */
+  margin: 0 10px; /* Add spacing between the images and text */
+  object-fit: cover; /* Ensures the image doesn't get stretched */
+}
+
+/* Header Bottom Section (Images and Text) */
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20%;
+  background-color: #333; /* Dark background */
+}
+
+.icon-left,
+.icon-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-text h2 {
+  color: white;
+  font-size: 24px;
+}
+
+/* Section Styling */
+.section {
+  background-color: white;
+  margin: 50px auto;
+  padding: 40px;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* Initially hidden */
+  transform: scaleX(0.95) translateY(50px); /* Slight shrink horizontally and slide from bottom */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section.animate {
+  opacity: 1; /* Fade in */
+  transform: scaleX(1) translateY(0); /* Return to full width and slide up */
+}
+
+/* Footer */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.footer h2 {
+  margin-bottom: 10px;
+}
+
+.footer p {
+  font-size: 16px;
+}
