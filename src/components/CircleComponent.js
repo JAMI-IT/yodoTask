@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaEnvelope, FaPlus } from "react-icons/fa"; // Importing the email and add icons
 import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion for animations
 import envlopimage from "../images/envelop.png";
+import addicon from "../images/add.png";
 // Main component
 const CircleWithButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,7 @@ const CircleWithButtons = () => {
             <img
               src={envlopimage}
               alt="Left"
-              className="header-image-cmp"
+              className="hover-image"
               onMouseOver={({ target }) => (target.style.color = "lightblue")}
               onMouseOut={({ target }) => (target.style.color = "white")}
             />
@@ -44,9 +45,7 @@ const CircleWithButtons = () => {
             )
           }
         >
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
           My deliverability varies between tools I use to reach customers, why?
         </button>
         <button
@@ -55,9 +54,7 @@ const CircleWithButtons = () => {
             openModal("What is email deliverability, and why is it important?")
           }
         >
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
           What is email deliverability, and why is it important?
         </button>
         <button
@@ -68,9 +65,7 @@ const CircleWithButtons = () => {
             )
           }
         >
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
           Can InboxPlease fix my domain’s email deliverability if it's been
           flagged as spam?{" "}
         </button>
@@ -81,9 +76,7 @@ const CircleWithButtons = () => {
           }
         >
           How long does it take to improve my email reputation?{" "}
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
         </button>
         <button
           style={{ ...styles.button, ...styles.left }}
@@ -95,9 +88,7 @@ const CircleWithButtons = () => {
         >
           I have to keep generating new domains as my deliverability drops can
           you fix them?{" "}
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
         </button>
         <button
           style={{ ...styles.button, ...styles.topLeft }}
@@ -108,9 +99,7 @@ const CircleWithButtons = () => {
           }
         >
           My deliverability varies between tools I use to reach customers, why?
-          <div style={styles.iconWrapper}>
-            <FaPlus style={styles.iconButton} />
-          </div>
+          <img src={addicon} alt="Monkey" className="header-image-add" />
         </button>
       </div>
 
@@ -159,8 +148,8 @@ const styles = {
     height: "min(80vw, 600px)",
   },
   circle: {
-    width: "70%",
-    height: "70%",
+    // width: "70%",
+    // height: "70%",
     borderRadius: "50%",
     backgroundColor: "#0A14D6",
     display: "flex",

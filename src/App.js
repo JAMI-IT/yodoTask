@@ -8,6 +8,7 @@ import bottomleft from "./images/window.png";
 import bottomright from "./images/monkey.png";
 import inboxplease from "./images/inbox.png";
 import next from "./images/next.png";
+import DashboardLayoutBasic from "./components/DashboardLayoutBasic";
 
 function Section({ title, content }) {
   const { ref, inView } = useInView({
@@ -40,7 +41,10 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
-
+  // Animation when drawer is in view
+  const { ref: drawerRef, inView: drawerInView } = useInView({
+    threshold: 0.5, // Trigger when 50% of the drawer is in view
+  });
   return (
     <div className="App">
       {/* Header */}
@@ -110,6 +114,13 @@ function App() {
       </div>
 
       {/* Sections to Animate */}
+      <div
+        ref={drawerRef}
+        className={`dashboard-layout ${drawerInView ? "dashboard-animate" : ""}`}
+      >
+        <DashboardLayoutBasic />
+      </div>
+
       <Section
         title="Section 1"
         content="This is the first section. It animates when you scroll."
@@ -118,16 +129,8 @@ function App() {
         title="Section 2"
         content="Here comes another section with smooth animation."
       />
-      <Section
-        title="Section 3"
-        content="Scrolling further? Here's the third animated section."
-      />
-      <Section
-        title="Section 3"
-        content="Scrolling further? Here's the third animated section."
-      />
+
       <CircleWithButtons />
-      {/* Footer */}
     </div>
   );
 }
