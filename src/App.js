@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import "./App.css";
-
-// Import images for the left and right side of the header
-import leftImage from "./images/left-image.jpg"; // Path to your left image
-import rightImage from "./images/left-image.jpg"; // Path to your right image
+import "./App.css"; // Import the updated CSS
+import CircleWithButtons from "./components/CircleComponent";
+import leftImage from "./images/google.png"; // Path to your left image
+import rightImage from "./images/apple.png"; // Path to your right image
+import bottomleft from "./images/window.png";
+import bottomright from "./images/monkey.png";
+import inboxplease from "./images/inbox.png";
+import next from "./images/next.png";
 
 function Section({ title, content }) {
   const { ref, inView } = useInView({
@@ -21,30 +24,88 @@ function Section({ title, content }) {
 }
 
 function App() {
+  const [currentText, setCurrentText] = useState("Marketer");
+  const [isSlidingOut, setIsSlidingOut] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsSlidingOut(true);
+      setTimeout(() => {
+        setCurrentText((prevText) =>
+          prevText === "Marketer" ? "SaaS" : "Marketer"
+        );
+        setIsSlidingOut(false);
+      }, 500); // Duration of the slide-out animation
+    }, 3000); // Change text every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="App">
       {/* Header */}
       <header className="header">
         <div className="header-left">
           {/* Left Text */}
-          <h1>Left Header Text</h1>
+          <img src={inboxplease} alt="Left" className="header-left-image" />
         </div>
         <div className="header-right">
-          {/* Right Button */}
-          <button className="header-button">Right Button</button>
+          <button className="header-button-login">Log In</button>
+          <button className="header-button">
+            Sign Up
+            <img src={next} alt="Next" className="header-image-next" />
+          </button>
         </div>
       </header>
 
       {/* Below the Header: Icons and Text */}
       <div className="header-bottom">
-        <div className="icon-left">
-          <img src={leftImage} alt="Left" className="header-image" />
+        <div>
+          <div className="icon-left">
+            <img src={leftImage} alt="Left" className="header-image" />
+          </div>
+          <div className="icon-left">
+            <img src={bottomleft} alt="Window" className="header-image" />
+          </div>
         </div>
         <div className="header-text">
-          <h2>Center Text Here</h2>
+          <h1 style={{ fontSize: "90px" }}>
+            Improve Your{" "}
+            <span style={{ color: "blue" }}>Email Deliverability</span> with
+            InboxPlease
+          </h1>
+          <div className="engagement-text-container">
+            <p>
+              Increase engagement and prevent your domain, IP, or applications
+              from being blacklisted. We work with any platform and email
+              provider to{"  "}
+              <span style={{ color: "blue" }}>Helping</span> {"   "}
+              <span className="sliding-text">{currentText}</span> {"    "}{" "}
+              improve inbox placement and maintain your email sending
+              reputation.
+            </p>
+          </div>
+          <div style={styles.container}>
+            <div style={styles.buttonContainer}>
+              <button className="header-button">
+                Get Started
+                <img src={next} alt="Next" className="header-image-next" />
+              </button>
+              <button className="header-button">
+                Get Started
+                <img src={next} alt="Next" className="header-image-next" />
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="icon-right">
-          <img src={rightImage} alt="Right" className="header-image" />
+
+        <div>
+          <div className="icon-right">
+            <img src={rightImage} alt="Right" className="header-image" />
+          </div>
+          <div className="icon-left">
+            <img src={bottomright} alt="Monkey" className="header-image" />
+          </div>
         </div>
       </div>
 
@@ -61,14 +122,41 @@ function App() {
         title="Section 3"
         content="Scrolling further? Here's the third animated section."
       />
-
+      <Section
+        title="Section 3"
+        content="Scrolling further? Here's the third animated section."
+      />
+      <CircleWithButtons />
       {/* Footer */}
-      <footer className="footer">
-        <h2>Frequently Asked Questions</h2>
-        <p>How can I use this app? Simply scroll to enjoy the animations!</p>
-      </footer>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    minHeight: "5vh",
+    gap: "10px", // Adjust the space between buttons as needed
+  },
+  button: {
+    display: "flex",
+    alignItems: "center",
+    fontSize: "16px",
+    backgroundColor: "#0A14D6",
+    color: "white",
+    border: "none",
+    borderRadius: "50px",
+    cursor: "pointer",
+  },
+  icon: {
+    marginLeft: "2px",
+  },
+};
 
 export default App;
