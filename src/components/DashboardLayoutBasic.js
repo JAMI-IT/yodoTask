@@ -1,19 +1,24 @@
 import * as React from "react";
-import { extendTheme, styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import { createTheme } from "@mui/material/styles";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import DescriptionIcon from "@mui/icons-material/Description";
-import LayersIcon from "@mui/icons-material/Layers";
+import SearchIcon from "@mui/icons-material/Search";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
-import { PageContainer } from "@toolpad/core/PageContainer";
-import Grid from "@mui/material/Grid2";
+import { useDemoRouter } from "@toolpad/core/internal";
+import inboxplease from "../images/inbox.png";
 
 const NAVIGATION = [
   {
     kind: "header",
-    title: "Main items",
+    title: "MENU",
   },
   {
     segment: "dashboard",
@@ -21,44 +26,32 @@ const NAVIGATION = [
     icon: <DashboardIcon />,
   },
   {
+    segment: "mailbox",
+    title: "Mail Box",
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: "schedulejob",
+    title: "Schedual Jobs",
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: "api",
+    title: "Api Integeration",
+    icon: <DashboardIcon />,
+  },
+  {
     segment: "orders",
     title: "Orders",
     icon: <ShoppingCartIcon />,
   },
-  {
-    kind: "divider",
-  },
-  {
-    kind: "header",
-    title: "Analytics",
-  },
-  {
-    segment: "reports",
-    title: "Reports",
-    icon: <BarChartIcon />,
-    children: [
-      {
-        segment: "sales",
-        title: "Sales",
-        icon: <DescriptionIcon />,
-      },
-      {
-        segment: "traffic",
-        title: "Traffic",
-        icon: <DescriptionIcon />,
-      },
-    ],
-  },
-  {
-    segment: "integrations",
-    title: "Integrations",
-    icon: <LayersIcon />,
-  },
 ];
 
-const demoTheme = extendTheme({
+const demoTheme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: "data-toolpad-color-scheme",
+  },
   colorSchemes: { light: true, dark: true },
-  colorSchemeSelector: "class",
   breakpoints: {
     values: {
       xs: 0,
@@ -70,85 +63,88 @@ const demoTheme = extendTheme({
   },
 });
 
-function useDemoRouter(initialPath) {
-  const [pathname, setPathname] = React.useState(initialPath);
-
-  const router = React.useMemo(() => {
-    return {
-      pathname,
-      searchParams: new URLSearchParams(),
-      navigate: (path) => setPathname(String(path)),
-    };
-  }, [pathname]);
-
-  return router;
+function DemoPageContent({ pathname }) {
+  return (
+    <Box
+      sx={{
+        py: 4,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        bgcolor: "transparent", // To avoid any background interference
+      }}
+    >
+      <Typography>Dashboard content for {pathname}</Typography>
+    </Box>
+  );
 }
 
-const Skeleton = styled("div")(({ theme, height }) => ({
-  backgroundColor: theme.palette.action.hover,
-  borderRadius: theme.shape.borderRadius,
-  height,
-  content: '" "',
-}));
+DemoPageContent.propTypes = {
+  pathname: PropTypes.string.isRequired,
+};
 
-export default function DashboardLayoutBasic(props) {
+function ToolbarActionsSearch() {
+  return <Stack width="100%"></Stack>;
+}
+
+function CustomAppTitle() {
+  return (
+    <Stack direction="row" alignItems="center" spacing={2}>
+      <img src={inboxplease} alt="Left" style={{ height: "40px" }} />
+      <TextField
+        fullWidth
+        placeholder="Search"
+        variant="outlined"
+        size="small"
+        sx={{ display: { xs: "none", md: "inline-block" } }}
+      />
+    </Stack>
+  );
+}
+
+function DashboardLayoutSlots(props) {
   const { window } = props;
 
   const router = useDemoRouter("/dashboard");
 
-  // Remove this const when copying and pasting into your project.
-  const demoWindow = window ? window() : undefined;
+  const demoWindow = window !== undefined ? window() : undefined;
 
   return (
-    <AppProvider
-      navigation={NAVIGATION}
-      router={router}
-      theme={demoTheme}
-      window={demoWindow}
+    <Box
+      sx={{
+        width: "100%", // Full width
+        height: "100vh", // Full viewport height
+        maxWidth: "1800px", // Optional: Limit the width
+        mx: "auto", // Center horizontally
+        my: 0, // Remove vertical margin to fill the entire height
+        overflow: "hidden", // Prevent overflow
+        boxShadow: 3, // Add shadow for emphasis
+        borderRadius: 0, // Remove rounded corners if not needed
+        bgcolor: "white", // Solid white background
+      }}
     >
-      <DashboardLayout>
-        <PageContainer sx={{ maxWidth: "100px", mx: "auto" }}>
-          {" "}
-          {/* Set maxWidth and center */}
-          <Grid container spacing={2}>
-            {/* Adjust grid layout to reduce width */}
-            <Grid xs={12} md={8}>
-              {" "}
-              {/* Reduce width by setting xs={12} md={8} */}
-              <Skeleton height={14} />
-            </Grid>
-            <Grid xs={12} md={8}>
-              <Skeleton height={14} />
-            </Grid>
-            <Grid xs={12} md={6}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid xs={12} md={6}>
-              <Skeleton height={100} />
-            </Grid>
-
-            <Grid xs={12}>
-              <Skeleton height={150} />
-            </Grid>
-            <Grid xs={12}>
-              <Skeleton height={14} />
-            </Grid>
-
-            <Grid xs={6} md={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid xs={6} md={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid xs={6} md={3}>
-              <Skeleton height={100} />
-            </Grid>
-            <Grid xs={6} md={3}>
-              <Skeleton height={100} />
-            </Grid>
-          </Grid>
-        </PageContainer>
-      </DashboardLayout>
-    </AppProvider>
+      <AppProvider
+        navigation={NAVIGATION}
+        router={router}
+        theme={demoTheme}
+        window={demoWindow}
+      >
+        <DashboardLayout
+          slots={{
+            appTitle: CustomAppTitle,
+            toolbarActions: ToolbarActionsSearch,
+          }}
+        >
+          <DemoPageContent pathname={router.pathname} />
+        </DashboardLayout>
+      </AppProvider>
+    </Box>
   );
 }
+
+DashboardLayoutSlots.propTypes = {
+  window: PropTypes.func,
+};
+
+export default DashboardLayoutSlots;

@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import "./App.css"; // Import the updated CSS
+import "./App.css";
 import CircleWithButtons from "./components/CircleComponent";
-import leftImage from "./images/google.png"; // Path to your left image
-import rightImage from "./images/apple.png"; // Path to your right image
+import leftImage from "./images/google.png";
+import rightImage from "./images/apple.png";
 import bottomleft from "./images/window.png";
 import bottomright from "./images/monkey.png";
 import inboxplease from "./images/inbox.png";
 import next from "./images/next.png";
+import next1 from "./images/whitearrow.png";
+import { motion } from "framer-motion";
 import DashboardLayoutBasic from "./components/DashboardLayoutBasic";
+import { Stack } from "@mui/material";
 
 function Section({ title, content }) {
   const { ref, inView } = useInView({
-    threshold: 0.3, // Trigger when 30% of the element is visible
-    triggerOnce: true, // Only trigger the animation once
+    threshold: 0.3,
+    triggerOnce: true,
   });
 
   return (
@@ -27,6 +30,7 @@ function Section({ title, content }) {
 function App() {
   const [currentText, setCurrentText] = useState("Marketer");
   const [isSlidingOut, setIsSlidingOut] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,22 +40,30 @@ function App() {
           prevText === "Marketer" ? "SaaS" : "Marketer"
         );
         setIsSlidingOut(false);
-      }, 500); // Duration of the slide-out animation
-    }, 3000); // Change text every 3 seconds
+      }, 500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
-  // Animation when drawer is in view
+
   const { ref: drawerRef, inView: drawerInView } = useInView({
-    threshold: 0.5, // Trigger when 50% of the drawer is in view
+    threshold: 0.5,
+    onChange: (inView) => {
+      if (inView && !hasAnimated) {
+        setHasAnimated(true);
+      }
+    },
   });
+
   return (
     <div className="App">
-      {/* Header */}
       <header className="header">
         <div className="header-left">
-          {/* Left Text */}
-          <img src={inboxplease} alt="Left" className="header-left-image" />
+          <img
+            src={inboxplease}
+            alt="InboxPlease Logo"
+            className="header-left-image"
+          />
         </div>
         <div className="header-right">
           <button className="header-button-login">Log In</button>
@@ -62,16 +74,8 @@ function App() {
         </div>
       </header>
 
-      {/* Below the Header: Icons and Text */}
       <div className="header-bottom">
-        <div>
-          <div className="icon-left">
-            <img src={leftImage} alt="Left" className="header-image" />
-          </div>
-          <div className="icon-left">
-            <img src={bottomleft} alt="Window" className="header-image" />
-          </div>
-        </div>
+        <img src={leftImage} alt="Google" className="header-image" />
         <div className="header-text">
           <h1 style={{ fontSize: "90px" }}>
             Improve Your{" "}
@@ -79,47 +83,49 @@ function App() {
             InboxPlease
           </h1>
           <div className="engagement-text-container">
-            <p>
+            <p style={{ width: "80%" }}>
               Increase engagement and prevent your domain, IP, or applications
               from being blacklisted. We work with any platform and email
-              provider to{"  "}
-              <span style={{ color: "blue" }}>Helping</span> {"   "}
-              <span className="sliding-text">{currentText}</span> {"    "}{" "}
-              improve inbox placement and maintain your email sending
-              reputation.
+              provider to {"   "}
+              <span style={{ color: "blue", fontWeight: "bold" }}>
+                helping
+              </span>{" "}
+              <span className="sliding-text">{currentText}</span> improve inbox
+              placement and maintain your email sending reputation.
             </p>
           </div>
-          <div style={styles.container}>
-            <div style={styles.buttonContainer}>
-              <button className="header-button">
-                Get Started
-                <img src={next} alt="Next" className="header-image-next" />
-              </button>
-              <button className="header-button">
-                Get Started
-                <img src={next} alt="Next" className="header-image-next" />
-              </button>
-            </div>
-          </div>
         </div>
-
-        <div>
-          <div className="icon-right">
-            <img src={rightImage} alt="Right" className="header-image" />
-          </div>
-          <div className="icon-left">
-            <img src={bottomright} alt="Monkey" className="header-image" />
-          </div>
+        <div className="icon-container">
+          <img src={rightImage} alt="Apple" className="header-image" />
         </div>
       </div>
 
-      {/* Sections to Animate */}
-      <div
-        ref={drawerRef}
-        className={`dashboard-layout ${drawerInView ? "dashboard-animate" : ""}`}
+      <motion.div
+        initial={{ scale: 1 }}
+        animate={{ scale: 0.9 }}
+        transition={{
+          type: "spring",
+          stiffness: 100,
+          damping: 200,
+          duration: 1,
+        }}
       >
+        <div style={styles.buttonContainer}>
+          <img src={bottomleft} alt="Windows" className="header-image" />
+          <Stack mt={10} gap={5} flexDirection={"row"} maxWidth={900}>
+            <button className="header-button-get">
+              Get Started
+              <img src={next1} alt="Next" className="header-image-next" />
+            </button>
+            <button className="header-button">
+              Learn More
+              <img src={next} alt="Next" className="header-image-next" />
+            </button>
+          </Stack>
+          <img src={bottomright} alt="Monkey" className="header-image" />
+        </div>
         <DashboardLayoutBasic />
-      </div>
+      </motion.div>
 
       <Section
         title="Section 1"
@@ -136,29 +142,13 @@ function App() {
 }
 
 const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   buttonContainer: {
     display: "flex",
-    flexDirection: "row",
-    minHeight: "5vh",
-    gap: "10px", // Adjust the space between buttons as needed
-  },
-  button: {
-    display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
-    fontSize: "16px",
-    backgroundColor: "#0A14D6",
-    color: "white",
-    border: "none",
-    borderRadius: "50px",
-    cursor: "pointer",
-  },
-  icon: {
-    marginLeft: "2px",
+    gap: "10px",
+    marginTop: "20px", // Adjust the vertical margin as needed
+    marginBottom: "20px", // Adjust the vertical margin as needed
   },
 };
 

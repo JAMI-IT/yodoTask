@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { FaEnvelope, FaPlus } from "react-icons/fa"; // Importing the email and add icons
-import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion for animations
+import { motion, AnimatePresence } from "framer-motion";
 import envlopimage from "../images/envelop.png";
+import cloosemodal from "../images/cloosemodal.png";
 import addicon from "../images/add.png";
+import { Stack } from "@mui/material";
+
 // Main component
 const CircleWithButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,13 +15,61 @@ const CircleWithButtons = () => {
     setIsModalOpen(true);
   };
 
+  const [setscales, setSetscales] = useState(1);
   const closeModal = () => {
     setIsModalOpen(false);
+    setSetscales(1);
   };
+
+  // Array of button data with their properties
+  const buttons = [
+    {
+      text: "My deliverability varies between tools I use to reach customers, why?",
+      content:
+        "My deliverability varies between tools I use to reach customers, why?",
+      position: "topRight",
+    },
+    {
+      text: "What is email deliverability, and why is it important?",
+      content: "What is email deliverability, and why is it important?",
+      position: "right",
+    },
+    {
+      text: "Can InboxPlease fix my domain’s email deliverability if it's been flagged as spam?",
+      content:
+        "Can InboxPlease fix my domain’s email deliverability if it's been flagged as spam?",
+      position: "bottomRight",
+    },
+    {
+      text: "How long does it take to improve my email reputation?",
+      content: "How long does it take to improve my email reputation?",
+      position: "bottomLeft",
+    },
+    {
+      text: "I have to keep generating new domains as my deliverability drops can you fix them?",
+      content:
+        "I have to keep generating new domains as my deliverability drops can you fix them?",
+      position: "left",
+    },
+    {
+      text: "My deliverability varies between tools I use to reach customers, why?",
+      content:
+        "My deliverability varies between tools I use to reach customers, why?",
+      position: "topLeft",
+    },
+  ];
 
   return (
     <div style={styles.container}>
-      <h1 style={{ textAlign: "center", fontSize: "clamp(24px, 5vw, 36px)" }}>
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "clamp(24px, 5vw, 36px)",
+          marginBottom: "20px", // Add space below the heading
+          zIndex: 1, // Ensures it stays on top of other content
+          position: "relative", // Keeps the header above other content
+        }}
+      >
         <span style={{ color: "black" }}>Frequently </span>
         <span style={{ color: "#0A14D6" }}>Asked Questions</span>
       </h1>
@@ -36,71 +86,31 @@ const CircleWithButtons = () => {
             />
           </span>
         </div>
-        {/* Buttons around the circle */}
-        <button
-          style={{ ...styles.button, ...styles.topRight }}
-          onClick={() =>
-            openModal(
-              "My deliverability varies between tools I use to reach customers, why?"
-            )
-          }
-        >
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-          My deliverability varies between tools I use to reach customers, why?
-        </button>
-        <button
-          style={{ ...styles.button, ...styles.right }}
-          onClick={() =>
-            openModal("What is email deliverability, and why is it important?")
-          }
-        >
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-          What is email deliverability, and why is it important?
-        </button>
-        <button
-          style={{ ...styles.button, ...styles.bottomRight }}
-          onClick={() =>
-            openModal(
-              "Can InboxPlease fix my domain’s email deliverability if it's been flagged as spam?"
-            )
-          }
-        >
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-          Can InboxPlease fix my domain’s email deliverability if it's been
-          flagged as spam?{" "}
-        </button>
-        <button
-          style={{ ...styles.button, ...styles.bottomLeft }}
-          onClick={() =>
-            openModal("How long does it take to improve my email reputation?")
-          }
-        >
-          How long does it take to improve my email reputation?{" "}
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-        </button>
-        <button
-          style={{ ...styles.button, ...styles.left }}
-          onClick={() =>
-            openModal(
-              "I have to keep generating new domains as my deliverability drops can you fix them?"
-            )
-          }
-        >
-          I have to keep generating new domains as my deliverability drops can
-          you fix them?{" "}
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-        </button>
-        <button
-          style={{ ...styles.button, ...styles.topLeft }}
-          onClick={() =>
-            openModal(
-              "My deliverability varies between tools I use to reach customers, why?"
-            )
-          }
-        >
-          My deliverability varies between tools I use to reach customers, why?
-          <img src={addicon} alt="Monkey" className="header-image-add" />
-        </button>
+
+        {/* Map through buttons array to render each button with animation */}
+        <motion.div>
+          {buttons.map((button, index) => (
+            <motion.div
+              key={index}
+              style={{ ...styles.button, ...styles[button.position] }}
+              onClick={() => {
+                openModal(button.content);
+                setSetscales(2);
+              }}
+              initial={{ opacity: 0, y: -20, scale: 0 }} // Start from slightly above and hidden
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: setscales,
+                rotate: isModalOpen ? 10 : 0,
+              }} // Animate to original position
+              transition={{ duration: 0.5, delay: index * 0.1 }} // Delay animation for each button
+            >
+              <img src={addicon} alt="icon" className="header-image-add" />
+              {button.text}
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
 
       {/* Animated Modal with Framer Motion */}
@@ -120,9 +130,21 @@ const CircleWithButtons = () => {
               exit={{ scale: 0.9 }}
               transition={{ duration: 0.3 }}
             >
-              <h2>Modal Content</h2>
-              <p>{modalContent}</p>
-              <button onClick={closeModal}>Close</button>
+              <Stack
+                flexDirection={"row"}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                height={100}
+              >
+                <img
+                  onClick={closeModal}
+                  src={cloosemodal}
+                  alt="Close"
+                  className="header-image-nega"
+                  style={{ cursor: "pointer" }}
+                />
+                <h2>{modalContent}</h2>
+              </Stack>
             </motion.div>
           </motion.div>
         )}
@@ -141,6 +163,7 @@ const styles = {
     minHeight: "50vh",
     padding: "20px",
     backgroundColor: "#F7F7F9",
+    position: "relative", // Ensure the modal aligns relative to this
   },
   circleContainer: {
     position: "relative",
@@ -148,8 +171,6 @@ const styles = {
     height: "min(80vw, 600px)",
   },
   circle: {
-    // width: "70%",
-    // height: "70%",
     borderRadius: "50%",
     backgroundColor: "#0A14D6",
     display: "flex",
@@ -223,12 +244,12 @@ const styles = {
 // Modal Styles for Framer Motion
 const modalStyles = {
   overlay: {
-    position: "fixed",
+    position: "absolute", // Position overlay absolutely relative to the container
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "#F7F7F9", // Transparent background
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -236,11 +257,14 @@ const modalStyles = {
   modal: {
     backgroundColor: "#fff",
     borderRadius: "10px",
+    flexDirection: "row",
     padding: "20px",
-    maxWidth: "500px",
-    width: "80%",
+    width: "100%", // Modal width set relative to parent container width
+    height: "20%", // Modal height set relative to parent container height
+    maxWidth: "700px", // Maximum width of the modal
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     zIndex: 1000,
+    overflow: "auto", // Ensure content can scroll if it's too large
   },
 };
 

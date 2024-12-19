@@ -43,16 +43,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 2%;
-
-  background-color: rgba(
-    253,
-    253,
-    253,
-    0.8
-  ); /* Adjusted background color with transparency */
+  padding: 10px 2%;
+  border-bottom: 2px solid #000000; /* Added border-bottom with color and width */
+  background-color: rgba(253, 253, 253, 0.8);
   color: white;
-  /* No need for a solid background, as the background image will be visible */
 }
 
 .header-left {
@@ -66,16 +60,21 @@
   margin: 0;
 }
 
-.header-right {
+.header-button-get {
   display: flex;
-  align-items: center;
-}
-
-.header-button1 {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  background-color: #ffffff;
+  align-items: center; /* Centers content vertically within the button */
+  gap: 10px; /* Adds space between button text and icon */
+  padding: 10px 10px; /* Adjusts button padding as needed */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  border-width: 1px; /* Sets the border width */
+  border-style: solid; /* Sets the border style */
+  border-color: #0a14d6; /* Sets the border color */
+  color: rgb(0, 0, 0); /* Sets button text color */
+  border-radius: 60px; /* Rounds button corners */
+  font-size: 22px; /* Sets font size */
+  font-weight: bold; /* Sets font weight */
+  background-color: "#0A14D6";
+  background: "#0A14D6";
 }
 
 .header-button:hover {
@@ -92,16 +91,17 @@
 
 .header-button {
   display: flex;
+
   align-items: center; /* Centers content vertically within the button */
-  gap: 5px; /* Adds space between button text and icon */
-  padding: 10px 10px; /* Adjusts button padding as needed */
+  gap: 10px; /* Adds space between button text and icon */
+  padding: 15px 50px; /* Adjusts button padding as needed */
   cursor: pointer; /* Changes cursor to pointer on hover */
-  border-width: 1px; /* Sets the border width */
+  border-width: 2px; /* Sets the border width */
   border-style: solid; /* Sets the border style */
   border-color: #000000; /* Sets the border color */
   background-color: #ffffff; /* Sets button background color */
   color: rgb(0, 0, 0); /* Sets button text color */
-  border-radius: 30px; /* Rounds button corners */
+  border-radius: 60px; /* Rounds button corners */
   font-size: 22px; /* Sets font size */
   font-weight: bold; /* Sets font weight */
 }
@@ -109,7 +109,7 @@
   display: flex;
   align-items: center; /* Centers content vertically within the button */
   gap: 5px; /* Adds space between button text and icon */
-  padding: 10px 20px; /* Adjusts button padding as needed */
+  padding: 5px 5px; /* Adjusts button padding as needed */
   cursor: pointer; /* Changes cursor to pointer on hover */
   background-color: #ffffff; /* Sets button background color */
   color: rgb(0, 0, 0); /* Sets button text color */
@@ -121,7 +121,7 @@
 }
 
 .header-button:hover {
-  background-color: #0056b3; /* Darkens background on hover */
+  background-color: #dde80d; /* Darkens background on hover */
 }
 
 .header-image {
@@ -136,6 +136,11 @@
   height: auto; /* Maintain the aspect ratio */
   object-fit: cover; /* Ensures the image doesn't get stretched */
 }
+.header-image-nega {
+  width: 35px; /* Set the width of the image */
+  height: 35px; /* Set the width of the image */
+  object-fit: cover; /* Ensures the image doesn't get stretched */
+}
 
 .header-image-cmp {
   width: 300px; /* Set the width of the image */
@@ -144,15 +149,10 @@
   object-fit: cover; /* Ensures the image doesn't get stretched */
 }
 
-.header-image-next {
-  width: 30px; /* Set the width of the image */
-  height: 30px; /* Maintain the aspect ratio */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
-}
 .header-left-image {
   width: 250px; /* Set the width of the image */
   height: auto; /* Maintain the aspect ratio */
-  margin: 0 10px; /* Add spacing between the images and text */
+  margin: 0 5px; /* Add spacing between the images and text */
   object-fit: cover; /* Ensures the image doesn't get stretched */
 }
 
@@ -176,7 +176,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px 0;
 }
 
 /* .engagement-text-container h4 {
@@ -361,7 +360,6 @@
 }
 .dashboard-layout {
   /* width: 60%; */
-  padding: 40px;
 
   margin: 0 auto;
   transform: translateY(100px); /* Initial off-screen position */
@@ -374,4 +372,15 @@
 .dashboard-animate {
   transform: translateY(0); /* Move to original position */
   opacity: 1;
+}
+
+.header-image-next {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  transition: transform 0.5s ease;
+}
+
+.hover-rotate:hover {
+  transform: rotate(360deg);
 }
