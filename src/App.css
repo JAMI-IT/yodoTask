@@ -1,17 +1,15 @@
-/* General Styling */
 .App {
   font-family: Arial, sans-serif;
   text-align: center;
   background-color: #f9f9f9;
   color: #333;
-  position: relative; /* Needed for positioning the background grid */
-  background-image: url("./images/background-image.png"); /* Add your background image here */
-  background-size: cover; /* Ensure the background image covers the whole screen */
-  background-position: center center; /* Center the background image */
-  background-attachment: fixed; /* Keep background fixed when scrolling */
+  position: relative;
+  background-image: url("./images/background-image.png");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
 }
 
-/* Grid Background */
 .App::before {
   content: "";
   position: absolute;
@@ -19,32 +17,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image:
-    repeating-linear-gradient(
+  background-image: repeating-linear-gradient(
       0deg,
       #ddd,
       #ddd 1px,
       transparent 1px,
       transparent 20px
     ),
-    /* Horizontal lines */
-      repeating-linear-gradient(
-        90deg,
-        #ddd,
-        #ddd 1px,
-        transparent 1px,
-        transparent 20px
-      ); /* Vertical lines */
-  z-index: -1; /* Send it to the background */
+    repeating-linear-gradient(
+      90deg,
+      #ddd,
+      #ddd 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  z-index: -1;
 }
 
-/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 2%;
-  border-bottom: 2px solid #000000; /* Added border-bottom with color and width */
+  border-bottom: 2px solid #000000;
   background-color: rgba(253, 253, 253, 0.8);
   color: white;
 }
@@ -62,120 +57,113 @@
 
 .header-button-get {
   display: flex;
-
-  align-items: center; /* Centers content vertically within the button */
-  gap: 10px; /* Adds space between button text and icon */
-  padding: 15px 50px; /* Adjusts button padding as needed */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  border-width: 2px; /* Sets the border width */
-  border-style: solid; /* Sets the border style */
-  border-color: #2600ff; /* Sets the border color */
-  background-color: #140c8a; /* Sets button background color */
-  color: rgb(255, 255, 255); /* Sets button text color */
-  border-radius: 60px; /* Rounds button corners */
-  font-size: 22px; /* Sets font size */
-  font-weight: bold; /* Sets font weight */
+  align-items: center;
+  gap: 10px;
+  padding: 15px 50px;
+  cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #2600ff;
+  background-color: #140c8a;
+  color: rgb(255, 255, 255);
+  border-radius: 60px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .header-button-get:hover {
   background-color: #2503b0;
 }
+
 .header-button-get:hover #next-image-get {
-  content: url("./images/znext.png"); /* Change to the desired hover image */
+  content: url("./images/znext.png");
 }
+
 .header-button:hover #next-image-get {
-  content: url("./images/zbnext.png"); /* Change to the desired hover image */
+  content: url("./images/zbnext.png");
 }
-/* Image Styling */
+
 .header-right {
   display: flex;
-  justify-content: center; /* Centers buttons horizontally */
-  align-items: center; /* Centers buttons vertically */
-  gap: 10px; /* Adds space between buttons */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .header-button {
   display: flex;
-
-  align-items: center; /* Centers content vertically within the button */
-  gap: 10px; /* Adds space between button text and icon */
-  padding: 15px 50px; /* Adjusts button padding as needed */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  border-width: 2px; /* Sets the border width */
-  border-style: solid; /* Sets the border style */
-  border-color: #000000; /* Sets the border color */
-  background-color: #ffffff; /* Sets button background color */
-  color: rgb(0, 0, 0); /* Sets button text color */
-  border-radius: 60px; /* Rounds button corners */
-  font-size: 22px; /* Sets font size */
-  font-weight: bold; /* Sets font weight */
+  align-items: center;
+  gap: 10px;
+  padding: 15px 50px;
+  cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #000000;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 60px;
+  font-size: 22px;
+  font-weight: bold;
 }
+
 .header-button-login {
   display: flex;
-  align-items: center; /* Centers content vertically within the button */
-  gap: 5px; /* Adds space between button text and icon */
-  padding: 5px 5px; /* Adjusts button padding as needed */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  background-color: #ffffff; /* Sets button background color */
-  color: rgb(0, 0, 0); /* Sets button text color */
-  border: none; /* Removes the border */
-  outline: none; /* Removes the focus outline */
-  border-radius: 30px; /* Rounds button corners */
-  font-size: 18px; /* Sets font size */
-  font-weight: bold; /* Sets font weight */
+  align-items: center;
+  gap: 5px;
+  padding: 5px 5px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .header-button:hover {
-  background-color: #dde80d; /* Darkens background on hover */
+  background-color: #dde80d;
 }
 
 .header-image {
-  width: 200px; /* Set the width of the image */
-  height: auto; /* Maintain the aspect ratio */
-  margin: 0 10px; /* Add spacing between the images and text */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
+  width: 200px;
+  height: auto;
+  margin: 0 10px;
+  object-fit: cover;
 }
 
 .header-image-add {
-  width: 35px; /* Set the width of the image */
-  height: auto; /* Maintain the aspect ratio */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
+  width: 35px;
+  height: auto;
+  object-fit: cover;
 }
+
 .header-image-nega {
-  width: 35px; /* Set the width of the image */
-  height: 35px; /* Set the width of the image */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
 }
 
 .header-image-cmp {
-  width: 300px; /* Set the width of the image */
-  height: auto; /* Maintain the aspect ratio */
-  margin: 0 10px; /* Add spacing between the images and text */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
+  width: 300px;
+  height: auto;
+  margin: 0 10px;
+  object-fit: cover;
 }
 
 .header-left-image {
-  width: 250px; /* Set the width of the image */
-  height: auto; /* Maintain the aspect ratio */
-  margin: 0 5px; /* Add spacing between the images and text */
-  object-fit: cover; /* Ensures the image doesn't get stretched */
+  width: 250px;
+  height: auto;
+  margin: 0 5px;
+  object-fit: cover;
 }
 
-/* Header Bottom Section (Images and Text) */
 .header-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20%; */
-  /* background-color: rgba(
-    51,
-    51,
-    51,
-    0.7
-  ); */
-  /* Dark background with transparency */
-  /* Transparency makes background fade into the background image */
 }
+
 .engagement-text-container {
   display: flex;
   justify-content: center;
@@ -183,12 +171,6 @@
   width: 100%;
 }
 
-/* .engagement-text-container h4 {
-  width: 70%;
-  text-align: center;
-} */
-
-/* Initial styling */
 .engagement-text-container h4 {
   position: relative;
   font-size: 1.2em;
@@ -196,17 +178,15 @@
   color: #000;
 }
 
-/* Styling for the sliding text */
 .slide-text {
   display: inline-block;
   position: relative;
-  color: transparent; /* Start with transparent text */
+  color: transparent;
   animation:
     slideIn 2s forwards,
     changeColor 2s forwards 2s;
 }
 
-/* Slide-in animation */
 @keyframes slideIn {
   0% {
     transform: translateX(-100%);
@@ -216,7 +196,6 @@
   }
 }
 
-/* Color change animation */
 @keyframes changeColor {
   0% {
     color: transparent;
@@ -246,43 +225,30 @@
   font-size: 24px;
 }
 
-/* Section Styling */
 .section {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-  ); /* White background with transparency */
+  background-color: rgba(255, 255, 255, 0.8);
   margin: 50px auto;
   padding: 40px;
   max-width: 800px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0; /* Initially hidden */
-  transform: scaleX(0.95) translateY(50px); /* Slight shrink horizontally and slide from bottom */
+  opacity: 0;
+  transform: scaleX(0.95) translateY(50px);
   transition:
     opacity 1s ease-out,
     transform 1s ease-out;
 }
 
 .section.animate {
-  opacity: 1; /* Fade in */
-  transform: scaleX(1) translateY(0); /* Return to full width and slide up */
+  opacity: 1;
+  transform: scaleX(1) translateY(0);
 }
 
-/* Footer */
 .footer {
-  background-color: rgba(
-    51,
-    51,
-    51,
-    0.7
-  ); /* Dark background with transparency */
+  background-color: rgba(51, 51, 51, 0.7);
   color: white;
   padding: 20px;
   margin-top: 30px;
-  /* Transparency to allow background to show through */
 }
 
 .footer h2 {
@@ -319,18 +285,18 @@
     color: blue;
   }
 }
-/* App.css */
+
 .icon-left,
 .icon-right {
   transition:
     transform 0.3s ease-in-out,
-    opacity 0.3s ease; /* Smooth transition for transform and opacity */
+    opacity 0.3s ease;
 }
 
 .icon-left:hover,
 .icon-right:hover {
-  transform: scale(0.9) translateX(-10px) translateY(-10px); /* Move and scale on hover */
-  opacity: 0.8; /* Reduce opacity for a subtle effect */
+  transform: scale(0.9) translateX(-10px) translateY(-10px);
+  opacity: 0.8;
 }
 
 .image-container {
@@ -343,15 +309,14 @@
   height: 400px;
   transition:
     transform 0.3s ease,
-    filter 0.3s ease; /* Smooth transition for transform and filter */
+    filter 0.3s ease;
 }
 
 .hover-image:hover {
-  transform: scale(1.01); /* Zoom in the image */
-  filter: brightness(70%); /* Darken the image */
+  transform: scale(1.01);
+  filter: brightness(70%);
 }
 
-/* App.css */
 .drawer-toggle-btn {
   position: absolute;
   top: 20px;
@@ -363,11 +328,10 @@
   cursor: pointer;
   border-radius: 5px;
 }
-.dashboard-layout {
-  /* width: 60%; */
 
+.dashboard-layout {
   margin: 0 auto;
-  transform: translateY(100px); /* Initial off-screen position */
+  transform: translateY(100px);
   opacity: 0;
   transition:
     transform 0.5s ease,
@@ -375,7 +339,7 @@
 }
 
 .dashboard-animate {
-  transform: translateY(0); /* Move to original position */
+  transform: translateY(0);
   opacity: 1;
 }
 
@@ -389,6 +353,7 @@
 .hover-rotate:hover {
   transform: rotate(360deg);
 }
+
 .card-image-container {
   position: absolute;
   top: 0;
@@ -397,10 +362,12 @@
   height: 420px;
   width: 100vw;
 }
+
 .open .card-image-container,
 .open .title-container {
   z-index: 1;
 }
+
 .overlay {
   z-index: 1;
   position: fixed;
@@ -421,6 +388,5 @@
   bottom: 0;
   width: 100vw;
   left: 50%;
-
   transform: translateX(-50%);
 }

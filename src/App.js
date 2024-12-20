@@ -12,7 +12,7 @@ import next1 from "./images/whitearrow.png";
 import { motion } from "framer-motion";
 import DashboardLayoutBasic from "./components/DashboardLayoutBasic";
 import { Stack } from "@mui/material";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Updated imports
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function Section({ title, content }) {
   const { ref, inView } = useInView({
@@ -162,8 +162,8 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     gap: "10px",
-    marginTop: "20px", // Adjust the vertical margin as needed
-    marginBottom: "20px", // Adjust the vertical margin as needed
+    marginTop: "20px",
+    marginBottom: "20px",
   },
 };
 
