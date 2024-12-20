@@ -62,25 +62,30 @@
 
 .header-button-get {
   display: flex;
+
   align-items: center; /* Centers content vertically within the button */
   gap: 10px; /* Adds space between button text and icon */
-  padding: 10px 10px; /* Adjusts button padding as needed */
+  padding: 15px 50px; /* Adjusts button padding as needed */
   cursor: pointer; /* Changes cursor to pointer on hover */
-  border-width: 1px; /* Sets the border width */
+  border-width: 2px; /* Sets the border width */
   border-style: solid; /* Sets the border style */
-  border-color: #0a14d6; /* Sets the border color */
-  color: rgb(0, 0, 0); /* Sets button text color */
+  border-color: #2600ff; /* Sets the border color */
+  background-color: #140c8a; /* Sets button background color */
+  color: rgb(255, 255, 255); /* Sets button text color */
   border-radius: 60px; /* Rounds button corners */
   font-size: 22px; /* Sets font size */
   font-weight: bold; /* Sets font weight */
-  background-color: "#0A14D6";
-  background: "#0A14D6";
 }
 
-.header-button:hover {
-  background-color: #f4efed;
+.header-button-get:hover {
+  background-color: #2503b0;
 }
-
+.header-button-get:hover #next-image-get {
+  content: url("./images/znext.png"); /* Change to the desired hover image */
+}
+.header-button:hover #next-image-get {
+  content: url("./images/zbnext.png"); /* Change to the desired hover image */
+}
 /* Image Styling */
 .header-right {
   display: flex;
@@ -342,8 +347,8 @@
 }
 
 .hover-image:hover {
-  transform: scale(1.1); /* Zoom in the image */
-  filter: brightness(80%); /* Darken the image */
+  transform: scale(1.01); /* Zoom in the image */
+  filter: brightness(70%); /* Darken the image */
 }
 
 /* App.css */
@@ -375,12 +380,47 @@
 }
 
 .header-image-next {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   margin-left: 10px;
   transition: transform 0.5s ease;
 }
 
 .hover-rotate:hover {
   transform: rotate(360deg);
+}
+.card-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 420px;
+  width: 100vw;
+}
+.open .card-image-container,
+.open .title-container {
+  z-index: 1;
+}
+.overlay {
+  z-index: 1;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  will-change: opacity;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 990px;
+}
+
+.overlay a {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  left: 50%;
+
+  transform: translateX(-50%);
 }

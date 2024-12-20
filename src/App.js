@@ -12,6 +12,7 @@ import next1 from "./images/whitearrow.png";
 import { motion } from "framer-motion";
 import DashboardLayoutBasic from "./components/DashboardLayoutBasic";
 import { Stack } from "@mui/material";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Updated imports
 
 function Section({ title, content }) {
   const { ref, inView } = useInView({
@@ -69,7 +70,12 @@ function App() {
           <button className="header-button-login">Log In</button>
           <button className="header-button">
             Sign Up
-            <img src={next} alt="Next" className="header-image-next" />
+            <img
+              src={next}
+              alt="Next"
+              id="next-image-get"
+              className="header-image-next"
+            />
           </button>
         </div>
       </header>
@@ -115,11 +121,21 @@ function App() {
           <Stack mt={10} gap={5} flexDirection={"row"} maxWidth={900}>
             <button className="header-button-get">
               Get Started
-              <img src={next1} alt="Next" className="header-image-next" />
+              <img
+                src={next1}
+                alt="Next"
+                className="header-image-next"
+                id="next-image-get"
+              />
             </button>
             <button className="header-button">
               Learn More
-              <img src={next} alt="Next" className="header-image-next" />
+              <img
+                src={next}
+                alt="Next"
+                id="next-image-get"
+                className="header-image-next"
+              />
             </button>
           </Stack>
           <img src={bottomright} alt="Monkey" className="header-image" />
@@ -135,7 +151,6 @@ function App() {
         title="Section 2"
         content="Here comes another section with smooth animation."
       />
-
       <CircleWithButtons />
     </div>
   );
