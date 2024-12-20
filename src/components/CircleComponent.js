@@ -4,12 +4,14 @@ import envlopimage from "../images/envelop.png";
 import cloosemodal from "../images/cloosemodal.png";
 import addicon from "../images/add.png";
 import { Stack } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { buttons } from "./buttonsdata";
 
-// Main component
 const CircleWithButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
-
+  const { id } = useParams();
+  const imageHasLoaded = true;
   const openModal = (content) => {
     setModalContent(content);
     setIsModalOpen(true);
@@ -21,59 +23,20 @@ const CircleWithButtons = () => {
     setSetscales(1);
   };
 
-  // Array of button data with their properties
-  const buttons = [
-    {
-      text: "My deliverability varies between tools I use to reach customers, why?",
-      content:
-        "My deliverability varies between tools I use to reach customers, why?",
-      position: "topRight",
-    },
-    {
-      text: "What is email deliverability, and why is it important?",
-      content: "What is email deliverability, and why is it important?",
-      position: "right",
-    },
-    {
-      text: "Can InboxPlease fix my domain’s email deliverability if it's been flagged as spam?",
-      content:
-        "Can InboxPlease fix my domain’s email deliverability if it's been flagged as spam?",
-      position: "bottomRight",
-    },
-    {
-      text: "How long does it take to improve my email reputation?",
-      content: "How long does it take to improve my email reputation?",
-      position: "bottomLeft",
-    },
-    {
-      text: "I have to keep generating new domains as my deliverability drops can you fix them?",
-      content:
-        "I have to keep generating new domains as my deliverability drops can you fix them?",
-      position: "left",
-    },
-    {
-      text: "My deliverability varies between tools I use to reach customers, why?",
-      content:
-        "My deliverability varies between tools I use to reach customers, why?",
-      position: "topLeft",
-    },
-  ];
-
   return (
     <div style={styles.container}>
       <h1
         style={{
           textAlign: "center",
           fontSize: "clamp(24px, 5vw, 36px)",
-          marginBottom: "20px", // Add space below the heading
-          zIndex: 1, // Ensures it stays on top of other content
-          position: "relative", // Keeps the header above other content
+          marginBottom: "20px",
+          zIndex: 1,
+          position: "relative",
         }}
       >
         <span style={{ color: "black" }}>Frequently </span>
         <span style={{ color: "#0A14D6" }}>Asked Questions</span>
       </h1>
-
       <div style={styles.circleContainer}>
         <div style={styles.circle}>
           <span className="changeColor">
@@ -86,8 +49,6 @@ const CircleWithButtons = () => {
             />
           </span>
         </div>
-
-        {/* Map through buttons array to render each button with animation */}
         <motion.div>
           {buttons.map((button, index) => (
             <motion.div
@@ -95,40 +56,65 @@ const CircleWithButtons = () => {
               style={{ ...styles.button, ...styles[button.position] }}
               onClick={() => {
                 openModal(button.content);
-                setSetscales(2);
+                setSetscales(0.7);
               }}
-              initial={{ opacity: 0, y: -20, scale: 0 }} // Start from slightly above and hidden
+              initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: 1,
                 y: 0,
                 scale: setscales,
-                rotate: isModalOpen ? 10 : 0,
-              }} // Animate to original position
-              transition={{ duration: 0.5, delay: index * 0.1 }} // Delay animation for each button
+              }}
+              transition={{ duration: 0.7, delay: index * 0.01 }}
             >
-              <img src={addicon} alt="icon" className="header-image-add" />
-              {button.text}
+              {index < 3 && (
+                <img src={addicon} alt="icon" className="header-image-add" />
+              )}
+              <motion.div
+                style={{ flex: 1, display: "flex", justifyContent: "center" }}
+              >
+                {button.text}
+              </motion.div>
+              {index >= 3 && (
+                <img src={addicon} alt="icon" className="header-image-add" />
+              )}
             </motion.div>
           ))}
         </motion.div>
       </div>
-
-      {/* Animated Modal with Framer Motion */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
             style={modalStyles.overlay}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.8,
+            }}
+            transition={{
+              duration: 0.8,
+              ease: "easeInOut",
+            }}
           >
             <motion.div
               style={modalStyles.modal}
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              initial={{ y: "50px", x: "-50px", opacity: 0 }}
+              animate={{
+                y: 0,
+                x: 0,
+                opacity: 1,
+              }}
+              exit={{
+                y: "-50px",
+                opacity: 0,
+              }}
+              transition={{
+                duration: 1,
+                ease: "easeInOut",
+              }}
             >
               <Stack
                 flexDirection={"row"}
@@ -153,7 +139,6 @@ const CircleWithButtons = () => {
   );
 };
 
-// Inline styles
 const styles = {
   container: {
     display: "flex",
@@ -163,7 +148,7 @@ const styles = {
     minHeight: "50vh",
     padding: "20px",
     backgroundColor: "#F7F7F9",
-    position: "relative", // Ensure the modal aligns relative to this
+    position: "relative",
   },
   circleContainer: {
     position: "relative",
@@ -172,7 +157,6 @@ const styles = {
   },
   circle: {
     borderRadius: "50%",
-    backgroundColor: "#0A14D6",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -241,15 +225,14 @@ const styles = {
   },
 };
 
-// Modal Styles for Framer Motion
 const modalStyles = {
   overlay: {
-    position: "absolute", // Position overlay absolutely relative to the container
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#F7F7F9", // Transparent background
+    backgroundColor: "#F7F7F9",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -259,12 +242,12 @@ const modalStyles = {
     borderRadius: "10px",
     flexDirection: "row",
     padding: "20px",
-    width: "100%", // Modal width set relative to parent container width
-    height: "20%", // Modal height set relative to parent container height
-    maxWidth: "700px", // Maximum width of the modal
+    width: "100%",
+    height: "20%",
+    maxWidth: "700px",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     zIndex: 1000,
-    overflow: "auto", // Ensure content can scroll if it's too large
+    overflow: "auto",
   },
 };
 

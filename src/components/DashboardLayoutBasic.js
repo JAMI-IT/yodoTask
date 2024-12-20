@@ -72,7 +72,7 @@ function DemoPageContent({ pathname }) {
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        bgcolor: "transparent", // To avoid any background interference
+        bgcolor: "transparent",
       }}
     >
       <Typography>Dashboard content for {pathname}</Typography>
@@ -113,15 +113,15 @@ function DashboardLayoutSlots(props) {
   return (
     <Box
       sx={{
-        width: "100%", // Full width
-        height: "100vh", // Full viewport height
-        maxWidth: "1800px", // Optional: Limit the width
-        mx: "auto", // Center horizontally
-        my: 0, // Remove vertical margin to fill the entire height
-        overflow: "hidden", // Prevent overflow
-        boxShadow: 3, // Add shadow for emphasis
-        borderRadius: 0, // Remove rounded corners if not needed
-        bgcolor: "white", // Solid white background
+        width: "100%",
+        height: "100vh",
+        maxWidth: "1800px",
+        mx: "auto",
+        my: 0,
+        overflow: "hidden",
+        boxShadow: 3,
+        borderRadius: 0,
+        bgcolor: "white",
       }}
     >
       <AppProvider
